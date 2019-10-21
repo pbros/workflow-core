@@ -9,7 +9,11 @@ namespace WorkflowCore.Tests.MongoDB.Scenarios
 {
     [Collection("Mongo collection")]
     public class MongoEventScenario : EventScenario
-    {        
+    {
+        public MongoEventScenario(Xunit.Abstractions.ITestOutputHelper outputHelper) : base(outputHelper)
+        {
+        }
+
         protected override void ConfigureServices(IServiceCollection services)
         {
             services.AddWorkflow(x => x.UseMongoDB(MongoDockerSetup.ConnectionString, "integration-tests"));

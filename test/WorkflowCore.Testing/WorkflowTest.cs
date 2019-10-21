@@ -18,12 +18,12 @@ namespace WorkflowCore.Testing
         protected IWorkflowHost Host;
         protected IPersistenceProvider PersistenceProvider;
         protected List<StepError> UnhandledStepErrors = new List<StepError>();
-        
+
         protected virtual void Setup()
         {
             //setup dependency injection
             IServiceCollection services = new ServiceCollection();
-            services.AddLogging();
+            ConfigureLogging(services);
             ConfigureServices(services);
 
             var serviceProvider = services.BuildServiceProvider();
@@ -47,6 +47,11 @@ namespace WorkflowCore.Testing
                 Step = step,
                 Workflow = workflow
             });
+        }
+
+        protected virtual void ConfigureLogging(IServiceCollection services)
+        {
+            services.AddLogging();
         }
 
         protected virtual void ConfigureServices(IServiceCollection services)

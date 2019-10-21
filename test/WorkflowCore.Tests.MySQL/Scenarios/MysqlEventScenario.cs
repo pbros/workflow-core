@@ -10,7 +10,11 @@ namespace WorkflowCore.Tests.MySQL.Scenarios
 {
     [Collection("Mysql collection")]
     public class MysqlEventScenario : EventScenario
-    {        
+    {
+        public MysqlEventScenario(Xunit.Abstractions.ITestOutputHelper outputHelper) : base(outputHelper)
+        {
+        }
+
         protected override void ConfigureServices(IServiceCollection services)
         {
             services.AddWorkflow(x => x.UseMySQL(MysqlDockerSetup.ScenarioConnectionString, true, true));

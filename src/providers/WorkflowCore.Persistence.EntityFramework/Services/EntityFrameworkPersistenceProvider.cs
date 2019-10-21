@@ -149,7 +149,43 @@ namespace WorkflowCore.Persistence.EntityFramework.Services
                     .FirstAsync();
 
                 var persistable = workflow.ToPersistable(existingEntity);
-                await db.SaveChangesAsync();
+
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    var changeInfo = db.ChangeTracker.Entries()
+                        .Where(t => t.State == EntityState.Modified || t.State == EntityState.Added)
+                        .Select(t => new
+                        {
+                            Original = t.OriginalValues.Properties.ToDictionary(pn => pn, pn => t.OriginalValues[pn]),
+                            Current = t.CurrentValues.Properties.ToDictionary(pn => pn, pn => t.CurrentValues[pn]),
+                        });
+
+                    foreach (var t in changeInfo)
+                    {
+                        foreach (var p in t.Current)
+                        {
+                            var current = p.Value;
+                            var original = t.Original[p.Key];
+
+                            if (original != null && current != null)
+                            {
+                                if (!current.Equals(original))
+                                {
+                                    // For breakpoint...
+                                    var x = 456;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
             }
         }
 

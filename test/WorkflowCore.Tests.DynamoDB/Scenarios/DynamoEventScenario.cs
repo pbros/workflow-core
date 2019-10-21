@@ -12,7 +12,11 @@ namespace WorkflowCore.Tests.DynamoDB.Scenarios
 {
     [Collection("DynamoDb collection")]
     public class DynamoEventScenario : EventScenario
-    {        
+    {
+        public DynamoEventScenario(Xunit.Abstractions.ITestOutputHelper outputHelper) : base(outputHelper)
+        {
+        }
+
         protected override void ConfigureServices(IServiceCollection services)
         {
             var cfg = new AmazonDynamoDBConfig {ServiceURL = DynamoDbDockerSetup.ConnectionString};

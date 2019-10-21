@@ -52,9 +52,10 @@ namespace WorkflowCore.UnitTests
                 WorkflowDefinitionId = "My Workflow",
                 Reference = "My Reference"
             };
+            var executionPointerId = Guid.NewGuid().ToString();
             workflow.ExecutionPointers.Add(new ExecutionPointer()
             {
-                Id = "1",
+                Id = executionPointerId,
                 Active = true,
                 StepId = 0,
                 SleepUntil = new DateTime(2000, 1, 1).ToUniversalTime(),
@@ -65,8 +66,8 @@ namespace WorkflowCore.UnitTests
             var retrievedWorkflow = Subject.GetWorkflowInstance(workflowId).Result;
 
             retrievedWorkflow.ShouldBeEquivalentTo(workflow);
-            retrievedWorkflow.ExecutionPointers.FindById("1")
-                .Scope.Should().ContainInOrder(workflow.ExecutionPointers.FindById("1").Scope);
+            retrievedWorkflow.ExecutionPointers.FindById(executionPointerId)
+                .Scope.Should().ContainInOrder(workflow.ExecutionPointers.FindById(executionPointerId).Scope);
         }
 
         [Fact]
@@ -82,9 +83,10 @@ namespace WorkflowCore.UnitTests
                 WorkflowDefinitionId = "My Workflow",
                 Reference = "My Reference"
             };
+            var executionPointerId1 = Guid.NewGuid().ToString();
             workflow01.ExecutionPointers.Add(new ExecutionPointer()
             {
-                Id = "1",
+                Id = executionPointerId1,
                 Active = true,
                 StepId = 0,
                 SleepUntil = new DateTime(2000, 1, 1).ToUniversalTime(),
@@ -102,9 +104,10 @@ namespace WorkflowCore.UnitTests
                 WorkflowDefinitionId = "My Workflow",
                 Reference = "My Reference"
             };
+            var executionPointerId2 = Guid.NewGuid().ToString();
             workflow02.ExecutionPointers.Add(new ExecutionPointer()
             {
-                Id = "1",
+                Id = executionPointerId2,
                 Active = true,
                 StepId = 0,
                 SleepUntil = new DateTime(2000, 1, 1).ToUniversalTime(),
@@ -122,9 +125,10 @@ namespace WorkflowCore.UnitTests
                 WorkflowDefinitionId = "My Workflow",
                 Reference = "My Reference"
             };
+            var executionPointerId3 = Guid.NewGuid().ToString();
             workflow03.ExecutionPointers.Add(new ExecutionPointer()
             {
-                Id = "1",
+                Id = executionPointerId3,
                 Active = true,
                 StepId = 0,
                 SleepUntil = new DateTime(2000, 1, 1).ToUniversalTime(),
@@ -138,18 +142,18 @@ namespace WorkflowCore.UnitTests
 
             var retrievedWorkflow01 = retrievedWorkflows.Single(o => o.Id == workflowId01);
             retrievedWorkflow01.ShouldBeEquivalentTo(workflow01);
-            retrievedWorkflow01.ExecutionPointers.FindById("1")
-                .Scope.Should().ContainInOrder(workflow01.ExecutionPointers.FindById("1").Scope);
+            retrievedWorkflow01.ExecutionPointers.FindById(executionPointerId1)
+                .Scope.Should().ContainInOrder(workflow01.ExecutionPointers.FindById(executionPointerId1).Scope);
 
             var retrievedWorkflow02 = retrievedWorkflows.Single(o => o.Id == workflowId02);
             retrievedWorkflow02.ShouldBeEquivalentTo(workflow02);
-            retrievedWorkflow02.ExecutionPointers.FindById("1")
-                .Scope.Should().ContainInOrder(workflow02.ExecutionPointers.FindById("1").Scope);
+            retrievedWorkflow02.ExecutionPointers.FindById(executionPointerId2)
+                .Scope.Should().ContainInOrder(workflow02.ExecutionPointers.FindById(executionPointerId2).Scope);
 
             var retrievedWorkflow03 = retrievedWorkflows.Single(o => o.Id == workflowId03);
             retrievedWorkflow03.ShouldBeEquivalentTo(workflow03);
-            retrievedWorkflow03.ExecutionPointers.FindById("1")
-                .Scope.Should().ContainInOrder(workflow03.ExecutionPointers.FindById("1").Scope);
+            retrievedWorkflow03.ExecutionPointers.FindById(executionPointerId3)
+                .Scope.Should().ContainInOrder(workflow03.ExecutionPointers.FindById(executionPointerId3).Scope);
         }
 
         [Fact]

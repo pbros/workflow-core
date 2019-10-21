@@ -7,11 +7,14 @@ using Xunit;
 using FluentAssertions;
 using System.Linq;
 using WorkflowCore.Testing;
+using Xunit.Abstractions;
 
 namespace WorkflowCore.IntegrationTests.Scenarios
 {
     public class EventScenario : WorkflowTest<EventScenario.EventWorkflow, EventScenario.MyDataClass>
     {
+        protected readonly ITestOutputHelper _outputHelper;
+
         public class MyDataClass
         {
             public string StrValue1 { get; set; }
@@ -33,10 +36,12 @@ namespace WorkflowCore.IntegrationTests.Scenarios
             }
         }
 
-        public EventScenario()
+        public EventScenario(ITestOutputHelper outputHelper)
         {
+            _outputHelper = outputHelper;
             Setup();
         }
+
 
         [Fact]
         public void Scenario()
