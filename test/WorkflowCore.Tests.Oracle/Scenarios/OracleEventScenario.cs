@@ -18,7 +18,7 @@ namespace WorkflowCore.Tests.Oracle.Scenarios
 
         protected override void ConfigureLogging(IServiceCollection services)
         {
-            services.AddLogging((builder) => builder.AddXUnit(_outputHelper));
+            services.AddLogging(/*(builder) => builder.AddXUnit(_outputHelper)*/);
         }
 
         protected override void ConfigureServices(IServiceCollection services)
