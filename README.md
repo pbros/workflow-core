@@ -2,12 +2,12 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/xnby6p5v4ur04u76?svg=true)](https://ci.appveyor.com/project/danielgerlag/workflow-core)
 
-Workflow Core is a light weight workflow engine targeting .NET Standard.  Think: long running processes with multiple tasks that need to track state.  It supports pluggable persistence and concurrency providers to allow for multi-node clusters.
+Workflow Core is a light weight embeddable workflow engine targeting .NET Standard.  Think: long running processes with multiple tasks that need to track state.  It supports pluggable persistence and concurrency providers to allow for multi-node clusters.
 
 ### Announcements
 
 #### New related project: Conductor
-Conductor is a stand-alone workflow server as opposed to a library that uses Workflow Core internally. It exposes an API that allows you to store workflow definitions, track running workflows, manage events and define lambdas and scripts for usage in your workflows.
+Conductor is a stand-alone workflow server as opposed to a library that uses Workflow Core internally. It exposes an API that allows you to store workflow definitions, track running workflows, manage events and define custom steps and scripts for usage in your workflows.
 
 https://github.com/danielgerlag/conductor
 
